@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour
         UpdateElapsedTime();
 
         // clear the game over flag
-        ///gameOver = false;
+        gameOver = false;
     }
 
 
