@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 10f;
 
     // the amount of gravity to add to the player
-    public float gravityModifier;
+    private float gravityModifier;
 
     // check to see if player is on the ground
     public bool isOnGround = true;
@@ -60,18 +60,16 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GetComponentReferences();
-
         Initialise();
+
+        GetComponentReferences();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        //WalkDontRun();
-
-        StartGame();
+        ReadyPlayerOne();
     }
 
 
@@ -97,13 +95,16 @@ public class PlayerController : MonoBehaviour
     private void Initialise()
     {
         // speed of player's walk
-        playerWalkSpeed = 1f;
+        playerWalkSpeed = 0.7f;
 
         // moves player along the 'z' axis
         playerHorizontalDirection = Vector3.forward;
 
         // value normally from player input
         playerHorizontalInput = 1f;
+
+        // the amount of gravity to add to the player
+        gravityModifier = 2f;
 
         // player game start position
         playerStartPosition = new Vector3(0f, 0f, 0f);
@@ -113,6 +114,20 @@ public class PlayerController : MonoBehaviour
 
         // reset player start position and rotation
         transform.position = walkStartPosition;
+    }
+
+
+    private void ReadyPlayerOne()
+    {
+        if (!gameController.inPlay)
+        {
+            return;
+        }
+
+        else
+        { 
+            WalkDontRun();
+        }
     }
 
 
@@ -128,13 +143,10 @@ public class PlayerController : MonoBehaviour
             // then set the player to the right boundary's 'x' position
             transform.position = new Vector3(playerStartPosition.x, transform.position.y, transform.position.z);
 
-            playerAnimator.Play("Idle");
-        }
+            gameController.gameOver = false;
 
-        else
-        {
-            playerAnimator.Play("Walk");
-        }  
+            StartGame();
+        }
     }
 
 
@@ -199,8 +211,9 @@ public class PlayerController : MonoBehaviour
         // if player has collided with an obstacle
         if (collidingObject.gameObject.CompareTag("Obstacle"))
         {
+            Debug.Log("COLLIDED WITH OBSTACLE");
             // set the game over flag
-            gameController.gameOver = true;
+            /*gameController.gameOver = true;
 
             // play crash sound
             audioPlayer.PlayOneShot(crashSound, 1f);
@@ -214,7 +227,9 @@ public class PlayerController : MonoBehaviour
             // play player death animation
             playerAnimator.SetBool("Death_b", true);
 
-            playerAnimator.SetInteger("DeathType_int", 1);
+            playerAnimator.SetInteger("DeathType_int", 1);*/
+
+            gameController.inPlay = false;
 
             // pause before show start screen
             StartCoroutine(GameOver());

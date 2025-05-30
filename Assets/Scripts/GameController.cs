@@ -48,10 +48,10 @@ public class GameController : MonoBehaviour
 
 
     // game over flag
-    public bool gameOver = false;
+    public bool gameOver;
 
     // pressed 's' key flag
-    public bool hasPressedKey = false;
+    public bool inPlay;
 
 
 
@@ -59,6 +59,8 @@ public class GameController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Initialise();
+
         GameOver();
     }
 
@@ -75,6 +77,14 @@ public class GameController : MonoBehaviour
     }
 
 
+    private void Initialise()
+    {
+        gameOver = true;
+
+        inPlay = false;
+    }
+
+
     private void WaitForSpaceBar()
     {
         // if the game id over
@@ -86,6 +96,9 @@ public class GameController : MonoBehaviour
                 // if we do
                 // clear the game over elements
                 gameOverPanel.gameObject.SetActive(false);
+
+                // game in play
+                inPlay = true;
 
                 // and restart the game
                 RestartGame();
@@ -109,14 +122,17 @@ public class GameController : MonoBehaviour
         UpdateElapsedTime();
 
         // clear the game over flag
-        gameOver = false;
+        ///gameOver = false;
     }
 
 
     public void GameOver()
     {
+        Debug.Log("G A M E  O V E R");
         // set game over flag
         gameOver = true;
+
+        inPlay = false;
 
         // if the current elapsed time is greater then the best time
         if (elapsedTime > bestTime)
