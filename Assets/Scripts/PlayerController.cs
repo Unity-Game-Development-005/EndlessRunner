@@ -213,23 +213,23 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("COLLIDED WITH OBSTACLE");
             // set the game over flag
-            /*gameController.gameOver = true;
+            gameController.gameOver = true;
+
+            gameController.inPlay = false;
 
             // play crash sound
             audioPlayer.PlayOneShot(crashSound, 1f);
 
             // stop playing the dirt particle effect
-            dirtParticle.Stop();
+            ///dirtParticle.Stop();
 
             // play the explosion particle effect
-            explosionParticle.Play();
+            ///explosionParticle.Play();
 
             // play player death animation
             playerAnimator.SetBool("Death_b", true);
 
-            playerAnimator.SetInteger("DeathType_int", 1);*/
-
-            gameController.inPlay = false;
+            playerAnimator.SetInteger("DeathType_int", 1);
 
             // pause before show start screen
             StartCoroutine(GameOver());

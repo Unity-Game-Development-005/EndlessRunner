@@ -130,7 +130,7 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("G A M E  O V E R");
         // set game over flag
-        gameOver = true;
+        ///gameOver = true;
 
         inPlay = false;
 
