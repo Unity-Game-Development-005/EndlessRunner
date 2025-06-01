@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2321600}
   - component: {fileID: 8545649497135480241}
   - component: {fileID: 5568179438715968491}
-  - component: {fileID: -2643458552609769887}
+  - component: {fileID: -6886831319799987483}
   m_Layer: 0
   m_Name: Crate_01
   m_TagString: Obstacle
@@ -137,7 +137,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.554324, y: 1.5543231, z: 1.5543228}
   m_Center: {x: 0, y: 0.77716154, z: 0}
---- !u!114 &-2643458552609769887
+--- !u!114 &-6886831319799987483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,9 +146,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 134104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c6ae527b30b4564e86c09fdf15a2332, type: 3}
+  m_Script: {fileID: 11500000, guid: 938fd16ecf54cee41a9dc6281fa7d9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpeed: 15
-  leftBoundary: -15
-  isMovingLeft: 1

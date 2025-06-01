@@ -15,13 +15,15 @@ public class SceneryController : MonoBehaviour
     private float sceneryWidth;
 
     // background movement speed
-    [SerializeField] private float sceneryMovementSpeed;
+    [HideInInspector] public float sceneryNormalSpeed;
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        InitialiseScenery();
+
         // set reference to game controller script
         gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
 
@@ -41,7 +43,7 @@ public class SceneryController : MonoBehaviour
         if (!gameController.gameOver)
         {
             // move the scenery
-            transform.Translate(sceneryMovementSpeed * Time.deltaTime * Vector3.left);
+            transform.Translate(sceneryNormalSpeed * Time.deltaTime * Vector3.left);
 
             // if the 'x' position of the scenery is less than the scenery's starting position 'x' - the scenery's width
             if (transform.position.x < sceneryStartPosition.x - sceneryWidth)
@@ -50,6 +52,12 @@ public class SceneryController : MonoBehaviour
                 transform.position = sceneryStartPosition;
             }
         }
+    }
+
+
+    private void InitialiseScenery()
+    {
+        sceneryNormalSpeed = 3f;
     }
 
 

@@ -15,16 +15,14 @@ public class PickupController : MonoBehaviour
     // list for spawned pickups
     private List<GameObject> spawnedPickupsList;
 
-
     // start position for coin spawner
-    private Vector3 pickupSpawnPos = new Vector3(25f, 4f, 0f);
-
+    private Vector3 pickupSpawnPos;
 
     // start delay in seconds for the obstacle spawner
-    private float startDelay = 2;
+    private float startDelay;
 
     // the time between spawns in seconds
-    public float repeatRate = 2;
+    private float repeatRate;
 
 
 
@@ -34,8 +32,22 @@ public class PickupController : MonoBehaviour
         // set reference to game controller script
         gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
 
+        Initialise();
+
         // start the obstacle spawner
         SelectRandomSpawnTime();
+    }
+
+
+    private void Initialise()
+    {
+        spawnedPickupsList = new List<GameObject>();
+
+        pickupSpawnPos = new Vector3(25f, 4f, 0f);
+
+        startDelay = 2;
+
+        repeatRate = 2;
     }
 
 
@@ -65,7 +77,21 @@ public class PickupController : MonoBehaviour
         GameObject instantitatedObject = Instantiate(pickupPrefab, pickupSpawnPos, pickupPrefab.transform.rotation);
 
         // add the pickup to the spawned pickups list
-        ///spawnedPickupsList.Add(instantitatedObject);
+        spawnedPickupsList.Add(instantitatedObject);
+    }
+
+
+    public void ClearSpawnedPickups()
+    {
+        if (spawnedPickupsList != null)
+        {
+            foreach (GameObject spawnedPickup in spawnedPickupsList)
+            {
+                Destroy(spawnedPickup);
+            }
+
+            spawnedPickupsList.Clear();
+        }
     }
 
 

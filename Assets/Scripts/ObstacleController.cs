@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpawnController : MonoBehaviour
+public class ObstacleController : MonoBehaviour
 {
     // get a reference to the game controller script
     private GameController gameController;
@@ -16,13 +16,13 @@ public class SpawnController : MonoBehaviour
     private List<GameObject> spawnedObstaclesList;
 
     // start position for obstacle spawner
-    private Vector3 obstacleSpawnPos = new Vector3(25f, 0f, 0f);
+    private Vector3 obstacleSpawnPos;
 
     // start delay in seconds for the obstacle spawner
-    private float startDelay = 2;
+    private float startDelay;
 
     // the time between spawns in seconds
-    public float repeatRate = 2;
+    public float repeatRate;
 
 
 
@@ -32,8 +32,22 @@ public class SpawnController : MonoBehaviour
         // set reference to game controller script
         gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
 
+        Initialise();
+
         // start the obstacle spawner
         SelectRandomSpawnTime();
+    }
+
+
+    private void Initialise()
+    {
+        spawnedObstaclesList = new List<GameObject>();
+
+        obstacleSpawnPos = new Vector3(25f, 1f, 0f);
+
+        startDelay = 2;
+
+        repeatRate = 2;
     }
 
 
@@ -63,10 +77,24 @@ public class SpawnController : MonoBehaviour
         int randomObstacle = Random.Range(0, obstaclePrefabs.Length);
 
         // instantiate the obstacle at random spawn location
-        Instantiate(obstaclePrefabs[randomObstacle], obstacleSpawnPos, obstaclePrefabs[randomObstacle].transform.rotation);
+        GameObject instantitatedObject = Instantiate(obstaclePrefabs[randomObstacle], obstacleSpawnPos, obstaclePrefabs[randomObstacle].transform.rotation);
 
         // add the obstacle to the spawned obstacles list
-        ///spawnedObstaclesList.Add(instantitatedObject);
+        spawnedObstaclesList.Add(instantitatedObject);
+    }
+
+
+    public void ClearSpawnedObstacles()
+    {
+        if (spawnedObstaclesList != null)
+        {
+            foreach (GameObject spawnedPickup in spawnedObstaclesList)
+            {
+                Destroy(spawnedPickup);
+            }
+
+            spawnedObstaclesList.Clear();
+        }
     }
 
 
