@@ -77,10 +77,10 @@ public class ObstacleController : MonoBehaviour
         int randomObstacle = Random.Range(0, obstaclePrefabs.Length);
 
         // instantiate the obstacle at random spawn location
-        GameObject instantitatedObject = Instantiate(obstaclePrefabs[randomObstacle], obstacleSpawnPos, obstaclePrefabs[randomObstacle].transform.rotation);
+        GameObject instantiatedObject = Instantiate(obstaclePrefabs[randomObstacle], obstacleSpawnPos, obstaclePrefabs[randomObstacle].transform.rotation);
 
         // add the obstacle to the spawned obstacles list
-        spawnedObstaclesList.Add(instantitatedObject);
+        spawnedObstaclesList.Add(instantiatedObject);
     }
 
 
